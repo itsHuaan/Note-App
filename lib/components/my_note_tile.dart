@@ -48,7 +48,7 @@ class MyNoteTile extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.info_rounded),
+            icon: const Icon(Icons.info_outline_rounded),
           )
         ],
       ),

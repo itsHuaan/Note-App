@@ -11,8 +11,15 @@ class FirestoreService {
     });
   }
 
-  Stream<QuerySnapshot> getNotes() {
-    final note = notes.orderBy('timestamp', descending: true).snapshots();
-    return note;
+  Stream<QuerySnapshot> readNotes() {
+    return notes.orderBy('timestamp', descending: true).snapshots();
+  }
+
+  Future<void> updateNote(String docID, String title, String detail) {
+    return notes.doc(docID).update({
+      'title': title,
+      'detail': detail,
+      'timestamp': Timestamp.now()
+    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:basic_crud/components/my_app_bar.dart';
+import 'package:basic_crud/components/my_floating_button.dart';
 import 'package:basic_crud/components/my_note_tile.dart';
 import 'package:basic_crud/provider/note_provider.dart';
 import 'package:basic_crud/services/firestore.dart';
@@ -17,9 +18,16 @@ class HomePage extends StatelessWidget {
     final detailController = TextEditingController();
     final firestoreService = FirestoreService();
     return Scaffold(
-      appBar: const MyAppBar(title: "ToDo"),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
+      appBar: MyAppBar(
+        title: Text(
+          'Notes',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+        ),
+      ),
+      floatingActionButton: MyFloatingButton(
+        icon: Icons.add,
         onPressed: () {
           noteProvider.addNote(
             context,
@@ -28,19 +36,12 @@ class HomePage extends StatelessWidget {
             firestoreService,
           );
         },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-        child: Icon(
-          Icons.add_rounded,
-          color: Theme.of(context).colorScheme.inversePrimary,
-        ),
       ),
       body: Center(
         child: Column(
           children: [
             StreamBuilder<QuerySnapshot>(
-              stream: firestoreService.getNotes(),
+              stream: firestoreService.readNotes(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List noteList = snapshot.data!.docs;

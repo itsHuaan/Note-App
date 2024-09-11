@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   int? maxLines = 1;
-  final String labelText;
-  final double borderRadius;
+  final String hintText;
+  Color color;
   MyTextField({
     super.key,
     required this.controller,
-    required this.labelText,
-    required this.borderRadius,
+    required this.hintText,
     this.maxLines,
+    this.color = const Color(0xFF000000),
   });
 
   @override
@@ -20,16 +20,16 @@ class MyTextField extends StatelessWidget {
       cursorColor: Theme.of(context).colorScheme.inversePrimary,
       controller: controller,
       decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        labelText: labelText,
-        labelStyle: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.inversePrimary),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          color: Color.fromARGB(64, 255, 255, 255),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.inversePrimary),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: color),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: color),
         ),
       ),
     );
