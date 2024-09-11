@@ -1,8 +1,10 @@
 import 'package:basic_crud/components/my_app_bar.dart';
 import 'package:basic_crud/components/my_floating_button.dart';
 import 'package:basic_crud/components/my_text_field.dart';
+import 'package:basic_crud/provider/theme_provider.dart';
 import 'package:basic_crud/services/firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditNotePage extends StatefulWidget {
   final TextEditingController titleController;
@@ -25,6 +27,7 @@ class EditNotePage extends StatefulWidget {
 class _EditNotePageState extends State<EditNotePage> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return WillPopScope(
       onWillPop: () async {
         widget.titleController.clear();
@@ -33,6 +36,14 @@ class _EditNotePageState extends State<EditNotePage> {
       },
       child: Scaffold(
         appBar: MyAppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                themeProvider.changeTheme();
+              },
+              icon: Icon(themeProvider.isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
+            )
+          ],
           title: MyTextField(
             controller: widget.titleController,
             hintText: 'Title',

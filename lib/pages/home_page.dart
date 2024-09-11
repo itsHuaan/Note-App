@@ -2,6 +2,7 @@ import 'package:basic_crud/components/my_app_bar.dart';
 import 'package:basic_crud/components/my_floating_button.dart';
 import 'package:basic_crud/components/my_note_tile.dart';
 import 'package:basic_crud/provider/note_provider.dart';
+import 'package:basic_crud/provider/theme_provider.dart';
 import 'package:basic_crud/services/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,21 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final noteProvider = Provider.of<NoteProvider>(context, listen: false);
     final titleController = TextEditingController();
     final detailController = TextEditingController();
     final firestoreService = FirestoreService();
     return Scaffold(
       appBar: MyAppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              themeProvider.changeTheme();
+            },
+            icon: Icon(themeProvider.isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
+          )
+        ],
         title: Text(
           'Notes',
           style: TextStyle(
