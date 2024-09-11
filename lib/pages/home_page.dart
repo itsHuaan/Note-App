@@ -54,7 +54,20 @@ class HomePage extends StatelessWidget {
                         Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                         String noteTitle = data['title'];
                         String noteCreated = DateFormat('MMM dd, yyyy').format(data['timestamp'].toDate());
-                        return MyNoteTile(noteTitle: noteTitle, noteCreated: noteCreated);
+                        return MyNoteTile(
+                          noteTitle: noteTitle,
+                          noteCreated: noteCreated,
+                          onPressed: () {
+                            noteProvider.fetchNote(context, titleController, detailController, firestoreService, docID);
+                            noteProvider.updateNote(
+                              context,
+                              titleController,
+                              detailController,
+                              firestoreService,
+                              docID,
+                            );
+                          },
+                        );
                       },
                     ),
                   );

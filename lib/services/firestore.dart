@@ -11,6 +11,10 @@ class FirestoreService {
     });
   }
 
+  Future<DocumentSnapshot> getNoteByID(String noteID) async {
+    return await notes.doc(noteID).get();
+  }
+
   Stream<QuerySnapshot> readNotes() {
     return notes.orderBy('timestamp', descending: true).snapshots();
   }

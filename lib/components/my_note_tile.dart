@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class MyNoteTile extends StatelessWidget {
   final String noteTitle;
   final String noteCreated;
+  final void Function()? onPressed;
   const MyNoteTile({
     super.key,
     required this.noteTitle,
     required this.noteCreated,
+    this.onPressed,
   });
 
   @override
@@ -47,7 +49,7 @@ class MyNoteTile extends StatelessWidget {
             ],
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: onPressed,
             icon: const Icon(Icons.info_outline_rounded),
           )
         ],

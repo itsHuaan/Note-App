@@ -14,6 +14,7 @@ class MyFloatingButton extends StatelessWidget {
     return FloatingActionButton(
       elevation: 0,
       onPressed: onPressed,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.0),
       ),
