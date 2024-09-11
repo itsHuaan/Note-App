@@ -57,7 +57,9 @@ class HomePage extends StatelessWidget {
                         return MyNoteTile(
                           noteTitle: noteTitle,
                           noteCreated: noteCreated,
-                          onPressed: () {
+                          // onPressed: () => firestoreService.deleteNote(docID),
+                          onPressed: () => firestoreService.deleteNote(docID),
+                          onTap: () {
                             noteProvider.fetchNote(context, titleController, detailController, firestoreService, docID);
                             noteProvider.updateNote(
                               context,
