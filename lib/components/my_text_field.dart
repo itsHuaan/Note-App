@@ -1,4 +1,6 @@
+import 'package:basic_crud/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -15,6 +17,7 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return TextField(
       maxLines: maxLines,
       cursorColor: Theme.of(context).colorScheme.inversePrimary,
@@ -22,8 +25,8 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
         hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Color.fromARGB(64, 255, 255, 255),
+        hintStyle: TextStyle(
+          color: themeProvider.isDarkMode ? const Color.fromARGB(64, 255, 255, 255) : const Color.fromARGB(64, 0, 0, 0),
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: color),
